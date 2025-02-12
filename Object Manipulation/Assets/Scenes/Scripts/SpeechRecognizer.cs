@@ -1,73 +1,65 @@
+using System.Collections; 
+using System.Collections.Generic;
 using UnityEngine;
-using HuggingFace.API;
-using System;
+using TMPro; 
+using UnityEngine.UI; 
 
-public class SpeechRecognizer : MonoBehaviour
-{
-    private AudioClip recordedClip;
-    private bool isRecording = false;
+public class SpeechRecognizer : MonoBehaviour {
+    [SerializeField] private Button StartBtn; 
+    [SerializeField] private Button StopBtn;
+    [SerializeField] private TextMeshProUGUI text;
 
-    GameObject startButton; 
-    GameObject stopButton;
+    private AudioClip clip;
+    private byte[] bytes; 
+    private bool recording; 
 
-    void Start()
-    {
-        startButton = GameObject.Find("StartBtn");
-        stopButton = GameObject.Find("StopBtn");
-
-        // Add listeners to the buttons
-        if (startButton != null)
-            startButton.GetComponent<Button>().onClick.AddListener(StartRecording);
-        if (stopButton != null)
-            stopButton.GetComponent<Button>().onClick.AddListener(StopRecording);
+    private void Start() {
+        StartBtn.onClick.AddListener(StartRecording);
+        StopBtn.onClick.AddListener(StopRecording);
     }
-    public void StartRecording()
-    {
-        if (!isRecording)
-        {
-            recordedClip = Microphone.Start(null, false, 10, 16000);
-            isRecording = true;
+
+    private void StartRecording() {
+        recording = true; 
+        clip = Microphone.Start(null, false, 10, 44100);
+    }
+
+    private void Update() {
+        if (recording && Microphone.GetPosition(null) >= clip.samples) {
+            StopRecording();
         }
     }
 
-    public void StopRecording()
-    {
-        if (isRecording)
-        {
-            Microphone.End(null);
-            isRecording = false;
-            ProcessAudio();
+    private void StopRecording() {
+        var position = Microphone.GetPosition(null);
+        Microphone.End(null);
+        var samples = new float[position * clip.channels];
+        clip.GetData(samples, 0);
+        bytes = EncodeAsWAV(samples, clip.frequency, clip in channels);
+        recording = false; 
+    }
+
+
+    private byte[] EncodeAsWAV(float[] samples, int frequency, int channels) {
+        using (var memoryStream = new MemoryStream(44 + samples.length*2)) {
+            using (var writer = new BinaryWriter(memoryStream)) {
+                writer.Write("RIFF".ToCharArray());
+                writer.Write(36 + samples.Length * 2);
+                writer.Write("WAVE".ToCharArray());
+                writer.Write("fmt ".ToCharArray());
+                writer.Write(16);
+                writer.Write((ushort) 1);
+                writer.Write((ushort) channels);
+                wwiter.Write(frequency);
+                writer.Write(frequency * channels * 2);
+                writer.Write((ushort) (channels * 2));
+                writer.Write((ushort) 16);
+                writer.Write("data".ToCharArray());
+                writer.Write(samples.Length * 2);
+                foreach (var sample in samples) {
+                        writer.Write((ushort) (sample * 32767));
+                } 
+            }
+            memoryStream.ToArray();
         }
-    }
-
-    private void ProcessAudio()
-    {
-        float[] samples = new float[recordedClip.samples];
-        recordedClip.GetData(samples, 0);
-
-        byte[] audioData = new byte[samples.Length * 2];
-        for (int i = 0; i < samples.Length; i++)
-        {
-            short value = (short)(samples[i] * short.MaxValue);
-            BitConverter.GetBytes(value).CopyTo(audioData, i * 2);
-        }
-
-        SendAudioToHuggingFace(audioData);
-    }
-
-    private void SendAudioToHuggingFace(byte[] audioData)
-    {
-        HuggingFaceAPI.AutomaticSpeechRecognition(audioData, OnTranscriptionSuccess, OnTranscriptionError);
-    }
-
-    private void OnTranscriptionSuccess(string transcription)
-    {
-        Debug.Log("Transcription: " + transcription);
-        // Here you can implement your command parsing logic
-    }
-
-    private void OnTranscriptionError(string error)
-    {
-        Debug.LogError("Transcription Error: " + error);
     }
 }
