@@ -300,8 +300,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75bb89f872fb1464d8dc3f41fe46648b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartBtn: {fileID: 167417525}
-  StopBtn: {fileID: 1431525286}
+  startButton: {fileID: 167417525}
+  stopButton: {fileID: 1431525286}
   text: {fileID: 2029343088}
 --- !u!1 &167417523
 GameObject:
@@ -781,9 +781,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75bb89f872fb1464d8dc3f41fe46648b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartBtn: {fileID: 0}
-  StopBtn: {fileID: 0}
-  text: {fileID: 0}
+  startButton: {fileID: 167417525}
+  stopButton: {fileID: 1431525286}
+  text: {fileID: 2029343088}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
