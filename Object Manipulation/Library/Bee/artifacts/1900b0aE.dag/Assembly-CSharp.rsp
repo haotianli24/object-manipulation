@@ -360,10 +360,9 @@
 "Assets/Free Wood Door Pack/Script/CameraOpenDoor.cs"
 "Assets/Free Wood Door Pack/Script/Door.cs"
 "Assets/Free Wood Door Pack/Script/FPSController.cs"
-"Assets/Samples/OpenAI Unity/0.2.2/Whisper/CommandProcessor.cs"
-"Assets/Samples/OpenAI Unity/0.2.2/Whisper/SaveWav.cs"
-"Assets/Samples/OpenAI Unity/0.2.2/Whisper/Whisper.cs"
-"Assets/Scenes/Scripts/SpeechRecognizer.cs"
+"Assets/Scenes/ObjectManipulation/CommandProcessor.cs"
+"Assets/Scenes/ObjectManipulation/SaveWav.cs"
+"Assets/Scenes/ObjectManipulation/Whisper.cs"
 -langversion:9.0
 /deterministic
 /optimize+
