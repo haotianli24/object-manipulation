@@ -15,17 +15,6 @@ A Unity-based 3D application that enables **voice-controlled object manipulation
 - **Interactive Environment**: 3D scene with physics-based interactions
 - **Multi-language Support**: Powered by Whisper's multilingual capabilities
 
-## Tech Stack
-
-```csharp
-public class TechStack
-{
-    public string[] Unity = { "Unity 2022.3+", "C# Scripting", "3D Physics" };
-    public string[] AI = { "OpenAI Whisper", "Speech-to-Text", "NLP" };
-    public string[] Backend = { "Python", "Audio Processing", "API Integration" };
-}
-```
-
 ## Quick Start
 
 ### Prerequisites
