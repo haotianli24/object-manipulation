@@ -2,14 +2,13 @@
 
 [![Unity](https://img.shields.io/badge/Unity-2022.3+-000000?style=flat&logo=unity)](https://unity.com)
 [![C#](https://img.shields.io/badge/C%23-239120?style=flat&logo=c-sharp)](https://docs.microsoft.com/en-us/dotnet/csharp/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-Whisper-412991?style=flat&logo=openai)](https://openai.com)
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python)](https://python.org)
 
-A Unity-based 3D application that enables **voice-controlled object manipulation** using OpenAI's Whisper speech recognition model for natural language processing.
+A Unity-based 3D application that enables **voice-controlled object manipulation** using Python Speechrecognition model for natural language processing.
 
 ## Features
 
-- **Speech Recognition**: Real-time voice commands using OpenAI Whisper
+- **Speech Recognition**: Real-time voice commands 
 - **3D Object Control**: Manipulate objects through natural language
 - **Real-time Processing**: Instant response to voice commands
 - **Interactive Environment**: 3D scene with physics-based interactions
@@ -20,7 +19,6 @@ A Unity-based 3D application that enables **voice-controlled object manipulation
 ### Prerequisites
 - Unity 2022.3 or later
 - Python 3.8+
-- OpenAI API key (if using API version)
 - Microphone access
 
 ### Installation
